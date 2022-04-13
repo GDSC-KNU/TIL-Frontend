@@ -18,6 +18,8 @@
         </activity>
         <activity android:name=".CalendarFunc"/>
         <activity android:name=".WritingFunc"/>
+        <activity android:name=".MyPageFunc"/>
+        <activity android:name=".ListFunc"/>
 
     </application>
 

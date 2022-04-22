@@ -3,8 +3,6 @@ package com.example.til
 import android.content.Intent
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
-import kotlinx.android.synthetic.main.calendar.*
-import kotlinx.android.synthetic.main.calendar.changeto
 import kotlinx.android.synthetic.main.list.*
 
 class ListFunc: AppCompatActivity() {
@@ -14,6 +12,11 @@ class ListFunc: AppCompatActivity() {
 
         changetoc.setOnClickListener({
             val intent = Intent(this, CalendarFunc::class.java)
+            startActivity(intent)
+        })
+
+        mypage.setOnClickListener({
+            val intent = Intent(this, MyPageFunc::class.java)
             startActivity(intent)
         })
     }

@@ -1,5 +1,7 @@
 package com.example.til
 
+import android.content.Intent
+import android.support.v4.content.ContextCompat
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
@@ -18,6 +20,9 @@ class RecycleAdapter(private val datalist: ArrayList<Data>) : RecyclerView.Adapt
     override fun onBindViewHolder(holder: RecycleAdapter.ViewHolder, position: Int) {
         val data = datalist[position]
         val listener = View.OnClickListener { it ->
+            val intent= Intent(holder.itemView?.context, DetailContent::class.java)
+            intent.putExtra("Detail_ID", data.id)
+            ContextCompat.startActivity(holder.itemView.context, intent, null)
             Toast.makeText(it.context, "Clicked ${data.title}", Toast.LENGTH_LONG).show()
         }
         holder.apply{

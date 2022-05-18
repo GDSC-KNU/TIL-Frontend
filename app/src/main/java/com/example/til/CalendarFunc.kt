@@ -1,12 +1,18 @@
 package com.example.til
 
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import android.support.v4.content.ContextCompat
 import android.support.v7.app.AppCompatActivity
+import android.view.KeyEvent.*
+import android.view.inputmethod.InputMethodManager
+import android.widget.Toast
 import com.prolificinteractive.materialcalendarview.CalendarDay
 import com.prolificinteractive.materialcalendarview.MaterialCalendarView
 import kotlinx.android.synthetic.main.calendar.*
 import kotlinx.android.synthetic.main.calendar.mypage
+import kotlinx.android.synthetic.main.list.*
 
 class CalendarFunc : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -76,7 +82,31 @@ class CalendarFunc : AppCompatActivity() {
 
         }
 
+        //검색
 
+        search.setOnKeyListener {v, keyCode, event ->
+            val imm=this.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+            if(event.action == ACTION_DOWN && keyCode == KEYCODE_ENTER) {
+                Toast.makeText(this, search.text, Toast.LENGTH_LONG).show()
+                imm.hideSoftInputFromWindow(search.windowToken, 0)
+
+                var list = search_dataAdd(search.text.toString())
+                val adapter = RecycleAdapter(list)
+                calendar_recycleView.adapter = adapter
+                return@setOnKeyListener true
+            }
+            false
+        }
+    }
+
+    fun search_dataAdd(search_item : String): java.util.ArrayList<Data> {
+        val list = java.util.ArrayList<Data>()
+        list.add(Data(1, "title", "2022-05-08", "hello"))
+        list.add(Data(2, "title2", "2022-05-09","hello2"))
+        list.add(Data(3, "title3", "2022-05-10","hello3"))
+
+        return list
     }
 }
+
 

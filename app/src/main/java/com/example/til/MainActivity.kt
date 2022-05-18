@@ -11,9 +11,14 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        firstbutton.setOnClickListener({
+        login_btn.setOnClickListener {
             val intent = Intent(this, CalendarFunc::class.java)
             startActivity(intent)
-        })
+        }
+
+        tosignupbtn.setOnClickListener {
+            val intent=Intent(this, SignUpFunc::class.java)
+            startActivity(intent)
+        }
     }
 }

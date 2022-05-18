@@ -8,15 +8,14 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="로그인"/>
-
+        android:text="회원가입"/>
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Email"/>
 
     <EditText
-        android:id="@+id/login_id"
+        android:id="@+id/signup_id"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="example@example.com"/>
@@ -27,28 +26,22 @@
         android:text="Password"/>
 
     <EditText
-        android:id="@+id/login_passwd"
+        android:id="@+id/signup_passwd"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>
 
     <Button
-        android:id="@+id/login_btn"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="로그인"/>
-
-    <TextView
+        android:id="@+id/tocalendarbtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="비밀번호 초기화"/>
+        android:text="계속하기"/>
+
 
     <TextView
-        android:id="@+id/tosignupbtn"
+        android:id="@+id/tologinbtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="회원가입"
-        android:textColor="#F85F6A"/>
-
+        android:text="계정이 이미 있나요? 로그인"/>
 
 
 </LinearLayout>

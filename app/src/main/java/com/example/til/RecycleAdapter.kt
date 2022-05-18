@@ -23,7 +23,7 @@ class RecycleAdapter(private val datalist: ArrayList<Data>) : RecyclerView.Adapt
             val intent= Intent(holder.itemView?.context, DetailContent::class.java)
             intent.putExtra("Detail_ID", data.id)
             ContextCompat.startActivity(holder.itemView.context, intent, null)
-            Toast.makeText(it.context, "Clicked ${data.title}", Toast.LENGTH_LONG).show()
+            //Toast.makeText(it.context, "Clicked ${data.title}", Toast.LENGTH_LONG).show()
         }
         holder.apply{
             bind(listener, data)

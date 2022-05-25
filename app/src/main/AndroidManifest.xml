@@ -21,9 +21,7 @@
         <activity android:name=".MyPageFunc"/>
         <activity android:name=".ListFunc"/>
         <activity android:name=".DetailContent"/>
-        <activity android:name=".LogInFunc"/>
         <activity android:name=".SignUpFunc"/>
-
     </application>
-
+    <uses-permission android:name="android.permission.INTERNET"/>
 </manifest>

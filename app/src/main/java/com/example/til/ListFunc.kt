@@ -1,7 +1,9 @@
 package com.example.til
 
+import android.app.ProgressDialog
 import android.content.Context
 import android.content.Intent
+import android.os.AsyncTask
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.view.KeyEvent
@@ -11,8 +13,16 @@ import kotlinx.android.synthetic.main.calendar.*
 import kotlinx.android.synthetic.main.list.*
 import kotlinx.android.synthetic.main.list.mypage
 import java.util.ArrayList
+import android.os.Build
+import android.os.StrictMode
+import com.squareup.okhttp.Dispatcher
+import com.squareup.okhttp.OkHttpClient
+import com.squareup.okhttp.Request
+import kotlinx.android.synthetic.main.activity_main.*
+import java.util.*
 
 class ListFunc: AppCompatActivity() {
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.list)
@@ -47,8 +57,36 @@ class ListFunc: AppCompatActivity() {
         }
     }
 
+
     fun dataAdd(): ArrayList<Data> {
         val list = ArrayList<Data>()
+
+        try {
+            val url = "https://gdsc-knu-til.herokuapp.com/posts"
+
+            // OkHttp 클라이언트 객체 생성
+            val client = OkHttpClient()
+
+            // GET 요청 객체 생성
+            val builder = Request.Builder().url(url).get()
+            builder.addHeader("Content-Type", "application/json; charset=utf-8");
+            val request = builder.build()
+
+            // OkHttp 클라이언트로 GET 요청 객체 전송
+            val response = client.newCall(request).execute()
+            println("START")
+            if (response.isSuccessful) {
+                // 응답 받아서 처리
+                val body = response.body()
+                if (body != null) {
+                    println("Response:" + body.string())
+                }
+            } else System.err.println("Error Occurred")
+            //          return true
+        } catch (e: Exception) {
+            e.printStackTrace()
+        }
+
         list.add(Data(1, "title", "2022-05-08", "hello"))
         list.add(Data(2, "title2", "2022-05-09","hello2"))
         list.add(Data(3, "title3", "2022-05-10","hello3"))
@@ -59,6 +97,8 @@ class ListFunc: AppCompatActivity() {
     }
 
     fun search_dataAdd(search_item : String): ArrayList<Data> {
+
+
         val list = ArrayList<Data>()
         list.add(Data(1, "title", "2022-05-08", "hello"))
         list.add(Data(2, "title2", "2022-05-09","hello2"))
@@ -66,4 +106,6 @@ class ListFunc: AppCompatActivity() {
 
         return list
     }
+
 }
+

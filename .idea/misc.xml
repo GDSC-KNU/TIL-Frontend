@@ -3,6 +3,9 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/AndroidStudio/TIL-Frontend/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.1328125" />
+        <entry key="..\:/AndroidStudio/TIL-Frontend/app/src/main/res/layout/activity_main.xml" value="0.1453125" />
+        <entry key="..\:/AndroidStudio/TIL-Frontend/app/src/main/res/layout/writing.xml" value="0.1453125" />
         <entry key="..\:/AndroidStudio/TILFrontend/app/src/main/res/layout/activity_main.xml" value="0.1" />
       </map>
     </option>

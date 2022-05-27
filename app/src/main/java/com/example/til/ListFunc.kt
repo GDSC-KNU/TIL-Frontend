@@ -1,27 +1,18 @@
 package com.example.til
 
-import android.app.ProgressDialog
 import android.content.Context
 import android.content.Intent
-import android.os.AsyncTask
+import android.os.Build
 import android.os.Bundle
+import android.os.StrictMode
 import android.support.v7.app.AppCompatActivity
 import android.view.KeyEvent
 import android.view.inputmethod.InputMethodManager
-import android.widget.Toast
-import kotlinx.android.synthetic.main.calendar.*
-import kotlinx.android.synthetic.main.list.*
-import kotlinx.android.synthetic.main.list.mypage
-import java.util.ArrayList
-import android.os.Build
-import android.os.StrictMode
-import com.squareup.okhttp.Dispatcher
 import com.squareup.okhttp.OkHttpClient
 import com.squareup.okhttp.Request
-import kotlinx.android.synthetic.main.activity_main.*
+import kotlinx.android.synthetic.main.list.*
 import org.json.JSONArray
 import org.json.JSONObject
-import java.util.*
 
 class ListFunc: AppCompatActivity() {
 
@@ -106,7 +97,7 @@ class ListFunc: AppCompatActivity() {
         var list = ArrayList<Data>()
 
         try {
-            val url = "https://gdsc-knu-til.herokuapp.com/posts"
+            val url = "http://gdsc-knu-til.herokuapp.com/posts"
             list=getData(url)
         } catch (e: Exception) {
             e.printStackTrace()
@@ -117,7 +108,7 @@ class ListFunc: AppCompatActivity() {
     fun search_dataAdd(search_item : String): ArrayList<Data> {
         var list = ArrayList<Data>()
         try {
-            val url = "https://gdsc-knu-til.herokuapp.com/posts/search?query="+search_item
+            val url = "http://gdsc-knu-til.herokuapp.com/posts/search?query="+search_item
             list=getData(url)
         } catch (e: Exception) {
             e.printStackTrace()

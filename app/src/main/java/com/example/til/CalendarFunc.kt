@@ -5,18 +5,15 @@ import android.content.Intent
 import android.os.Build
 import android.os.Bundle
 import android.os.StrictMode
-import android.support.v4.content.ContextCompat
 import android.support.v7.app.AppCompatActivity
-import android.view.KeyEvent.*
+import android.view.KeyEvent.ACTION_DOWN
+import android.view.KeyEvent.KEYCODE_ENTER
 import android.view.inputmethod.InputMethodManager
-import android.widget.Toast
 import com.prolificinteractive.materialcalendarview.CalendarDay
 import com.prolificinteractive.materialcalendarview.MaterialCalendarView
 import com.squareup.okhttp.OkHttpClient
 import com.squareup.okhttp.Request
 import kotlinx.android.synthetic.main.calendar.*
-import kotlinx.android.synthetic.main.calendar.mypage
-import kotlinx.android.synthetic.main.list.*
 import org.json.JSONArray
 import org.json.JSONObject
 
@@ -56,7 +53,7 @@ class CalendarFunc : AppCompatActivity() {
 //예시
         var list = ArrayList<Data>()
         try {
-            val url = "https://gdsc-knu-til.herokuapp.com/posts"
+            val url = "http://gdsc-knu-til.herokuapp.com/posts"
             list=getData(url)
         } catch (e: Exception) {
             e.printStackTrace()
@@ -77,10 +74,10 @@ class CalendarFunc : AppCompatActivity() {
             val clickList = java.util.ArrayList<Data>()
 
             for (d in list) {
-                var ymd = d.date.split("-")
-                var yy = Integer.parseInt(ymd[0])
-                var mm = Integer.parseInt(ymd[1])
-                var dd = Integer.parseInt(ymd[2])
+                val ymd = d.date.split("-")
+                val yy = Integer.parseInt(ymd[0])
+                val mm = Integer.parseInt(ymd[1])
+                val dd = Integer.parseInt(ymd[2])
                 if (date.year == yy && date.month == mm && date.day == dd) {
                     clickList.add(Data(d.id, d.title, d.date, d.content))
                 }
@@ -108,7 +105,7 @@ class CalendarFunc : AppCompatActivity() {
     fun search_dataAdd(search_item : String): java.util.ArrayList<Data> {
         var list = java.util.ArrayList<Data>()
         try {
-            val url = "https://gdsc-knu-til.herokuapp.com/posts/search?query="+search_item
+            val url = "http://gdsc-knu-til.herokuapp.com/posts/search?query="+search_item
             list=getData(url)
         } catch (e: Exception) {
             e.printStackTrace()

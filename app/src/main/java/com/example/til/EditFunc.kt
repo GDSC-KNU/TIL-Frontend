@@ -12,14 +12,15 @@ package com.example.til
 //}
 
 //import androidx.appcompat.app.AppCompatActivity
-import android.os.Bundle
-import android.util.Log
 import android.content.Intent
 import android.os.Build
+import android.os.Bundle
 import android.os.StrictMode
 import android.support.v4.content.ContextCompat
 import android.support.v7.app.AppCompatActivity
+import android.util.Log
 import com.example.til.databinding.EditPageBinding
+import com.example.til.jwt.AuthInterceptor
 import com.squareup.okhttp.MediaType
 import com.squareup.okhttp.OkHttpClient
 import com.squareup.okhttp.Request
@@ -75,6 +76,7 @@ class EditFunc : AppCompatActivity() {
         try {
             val url = "http://gdsc-knu-til.herokuapp.com/posts/"+id
             val client = OkHttpClient()
+            client.interceptors().add(AuthInterceptor())
 
             // GET 요청 객체 생성
             val builder = Request.Builder().url(url).get()
@@ -109,6 +111,8 @@ class EditFunc : AppCompatActivity() {
             println(post)
 
             val client = OkHttpClient()
+            client.interceptors().add(AuthInterceptor())
+
             val requestBody = RequestBody.create(MediaType.parse("application/json; charset=utf-8"), post)
             // GET 요청 객체 생성
             val builder = Request.Builder().url(url).put(requestBody)

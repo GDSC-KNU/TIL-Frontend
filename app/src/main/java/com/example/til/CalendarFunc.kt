@@ -9,6 +9,7 @@ import android.support.v7.app.AppCompatActivity
 import android.view.KeyEvent.ACTION_DOWN
 import android.view.KeyEvent.KEYCODE_ENTER
 import android.view.inputmethod.InputMethodManager
+import com.example.til.jwt.AuthInterceptor
 import com.prolificinteractive.materialcalendarview.CalendarDay
 import com.prolificinteractive.materialcalendarview.MaterialCalendarView
 import com.squareup.okhttp.OkHttpClient
@@ -43,7 +44,6 @@ class CalendarFunc : AppCompatActivity() {
             startActivity(intent)
         }
 
-
         //오늘 표시
         val todayIs = TodayExpress(this)
         materialCalendar.addDecorator(todayIs)
@@ -54,6 +54,7 @@ class CalendarFunc : AppCompatActivity() {
         var list = ArrayList<Data>()
         try {
             val url = "http://gdsc-knu-til.herokuapp.com/posts"
+
             list=getData(url)
         } catch (e: Exception) {
             e.printStackTrace()
@@ -117,6 +118,7 @@ class CalendarFunc : AppCompatActivity() {
         val list = java.util.ArrayList<Data>()
         // OkHttp 클라이언트 객체 생성
         val client = OkHttpClient()
+        client.interceptors().add(AuthInterceptor())
 
         // GET 요청 객체 생성
         val builder = Request.Builder().url(url).get()
@@ -125,28 +127,28 @@ class CalendarFunc : AppCompatActivity() {
 
         // OkHttp 클라이언트로 GET 요청 객체 전송
         val response = client.newCall(request).execute()
-        println("START")
         if (response.isSuccessful) {
             // 응답 받아서 처리
             val body = response.body()
             if (body != null) {
                 val responseStr = body.string()
-                val json : JSONObject = JSONObject(responseStr)
-                var json_arr : JSONArray =json.getJSONArray("data")
+                val json = JSONObject(responseStr)
+                val jsonArr : JSONArray =json.getJSONArray("data")
 
-                //    var arrayList : ArrayList<TIL> = ArrayList()
-                for(i in 0 until json_arr.length()){
-                    var json_content : JSONObject = json_arr.getJSONObject(i)
-                    var til : Data = Data(
-                        json_content.getInt("id"),
-                        json_content.getString("title"),
-                        json_content.getString("date"),
-                        json_content.getString("content")
+                for(i in 0 until jsonArr.length()){
+                    val jsonContent : JSONObject = jsonArr.getJSONObject(i)
+                    val til = Data(
+                        jsonContent.getInt("id"),
+                        jsonContent.getString("title"),
+                        jsonContent.getString("date"),
+                        jsonContent.getString("content")
                     )
                     list.add(til)
                 }
             }
-        } else System.err.println("Error Occurred")
+        } else {
+            System.err.println("code: ${response.code()}, body: ${response.body().string()}")
+        }
 
         return list
     }

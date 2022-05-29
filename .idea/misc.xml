@@ -3,10 +3,15 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
-        <entry key="..\:/AndroidStudio/TIL-Frontend/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.1328125" />
-        <entry key="..\:/AndroidStudio/TIL-Frontend/app/src/main/res/layout/activity_main.xml" value="0.1453125" />
-        <entry key="..\:/AndroidStudio/TIL-Frontend/app/src/main/res/layout/writing.xml" value="0.1453125" />
         <entry key="..\:/AndroidStudio/TILFrontend/app/src/main/res/layout/activity_main.xml" value="0.1" />
+        <entry key="..\:/Users/최정훈/Documents/GitHub/TIL-Frontend/app/src/main/res/drawable/account.xml" value="0.1" />
+        <entry key="..\:/Users/최정훈/Documents/GitHub/TIL-Frontend/app/src/main/res/drawable/list_icon.xml" value="0.315625" />
+        <entry key="..\:/Users/최정훈/Documents/GitHub/TIL-Frontend/app/src/main/res/drawable/search_icon.xml" value="0.1" />
+        <entry key="..\:/Users/최정훈/Documents/GitHub/TIL-Frontend/app/src/main/res/layout/activity_main.xml" value="0.11875" />
+        <entry key="..\:/Users/최정훈/Documents/GitHub/TIL-Frontend/app/src/main/res/layout/activity_mypage.xml" value="0.12135416666666667" />
+        <entry key="..\:/Users/최정훈/Documents/GitHub/TIL-Frontend/app/src/main/res/layout/calendar.xml" value="0.1" />
+        <entry key="..\:/Users/최정훈/Documents/GitHub/TIL-Frontend/app/src/main/res/layout/check.xml" value="0.2" />
+        <entry key="..\:/Users/최정훈/Documents/GitHub/TIL-Frontend/app/src/main/res/layout/writing.xml" value="0.2" />
       </map>
     </option>
   </component>

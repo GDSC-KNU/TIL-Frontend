@@ -21,5 +21,5 @@
         </activity>
         <activity android:name=".WritingFunc"/>
     </application>
-
+    <uses-permission android:name="android.permission.INTERNET"/>ss
 </manifest>

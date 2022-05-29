@@ -51,7 +51,13 @@ android:layout_width="match_parent"
 android:layout_height="30dp"
 app:srcCompat="@drawable/divider2" />
 
-<us.feras.mdv.MarkdownView
+    <TextView
+        android:id="@+id/dateNow"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="작성일: " />
+
+    <us.feras.mdv.MarkdownView
 android:id="@+id/markdownView"
 android:layout_width="match_parent"
 android:layout_height="300dp" />

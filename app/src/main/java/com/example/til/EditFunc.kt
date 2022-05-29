@@ -103,9 +103,7 @@ class EditFunc : AppCompatActivity() {
 
     private fun post(id: Int, uploadTitle: String, uploadDate: String, uploadText: String){
         try {
-            println("\""+uploadTitle)
             val url = "http://gdsc-knu-til.herokuapp.com/posts/"+id
-            println(id)
             val post=""+"{"+"\"title\": "+"\""+uploadTitle+"\","+ "\"date\": "+"\""+uploadDate+"\","+
             "\"content\": "+"\""+uploadText+"\""+"}"
             println(post)

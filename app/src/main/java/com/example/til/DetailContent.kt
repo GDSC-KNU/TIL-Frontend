@@ -51,6 +51,8 @@ class DetailContent : AppCompatActivity() {
         }
 
         return_button.setOnClickListener() {
+            val intent = Intent(this, ListFunc::class.java)
+            startActivity(intent)
             finish()
         }
     }

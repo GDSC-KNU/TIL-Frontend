@@ -26,6 +26,11 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+
+    }
 }
 
 dependencies {
@@ -44,4 +49,7 @@ dependencies {
     androidTestImplementation 'com.android.support.test:runner:1.0.2'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
     implementation 'com.github.PhilJay:MPAndroidChart:v3.0.2'
+    implementation 'com.fasterxml.jackson.module:jackson-module-kotlin:2.13.0'
+    implementation 'us.feras.mdv:markdownview:1.1.0'
+
 }

@@ -21,6 +21,7 @@ import android.support.v7.app.AppCompatActivity
 import android.util.Log
 import com.example.til.databinding.EditPageBinding
 import com.example.til.jwt.AuthInterceptor
+import com.fasterxml.jackson.databind.ObjectMapper
 import com.squareup.okhttp.MediaType
 import com.squareup.okhttp.OkHttpClient
 import com.squareup.okhttp.Request
@@ -106,14 +107,16 @@ class EditFunc : AppCompatActivity() {
     private fun post(id: Int, uploadTitle: String, uploadDate: String, uploadText: String){
         try {
             val url = "http://gdsc-knu-til.herokuapp.com/posts/"+id
-            val post=""+"{"+"\"title\": "+"\""+uploadTitle+"\","+ "\"date\": "+"\""+uploadDate+"\","+
-            "\"content\": "+"\""+uploadText+"\""+"}"
-            println(post)
 
-            val client = OkHttpClient()
+            val jsonObject = JSONObject()
+            jsonObject.put("title", uploadTitle)
+            jsonObject.put("date", uploadDate)
+            jsonObject.put("content", uploadText)
+
+            val client=OkHttpClient()
             client.interceptors().add(AuthInterceptor())
 
-            val requestBody = RequestBody.create(MediaType.parse("application/json; charset=utf-8"), post)
+            val requestBody = RequestBody.create(MediaType.parse("application/json; charset=utf-8"), jsonObject.toString())
             // GET 요청 객체 생성
             val builder = Request.Builder().url(url).put(requestBody)
             val request = builder.build()
@@ -126,7 +129,6 @@ class EditFunc : AppCompatActivity() {
                 val body = response.body()
                 if (body != null) {
                     val responseStr = body.string()
-                    println(responseStr)
 
                     val intent= Intent(this, DetailContent::class.java)
                     intent.putExtra("Detail_ID", Integer.parseInt(responseStr))
@@ -137,4 +139,6 @@ class EditFunc : AppCompatActivity() {
             e.printStackTrace()
         }
     }
+
+    class EditContent (val title : String, val date : String, val content : String)
 }

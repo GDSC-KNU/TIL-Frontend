@@ -8,6 +8,7 @@ import android.os.StrictMode
 import android.support.v7.app.AppCompatActivity
 import android.view.KeyEvent
 import android.view.inputmethod.InputMethodManager
+import com.example.til.jwt.AuthInterceptor
 import com.squareup.okhttp.OkHttpClient
 import com.squareup.okhttp.Request
 import kotlinx.android.synthetic.main.list.*
@@ -59,6 +60,7 @@ class ListFunc: AppCompatActivity() {
         val list = ArrayList<Data>()
         // OkHttp 클라이언트 객체 생성
         val client = OkHttpClient()
+        client.interceptors().add(AuthInterceptor())
 
         // GET 요청 객체 생성
         val builder = Request.Builder().url(url).get()

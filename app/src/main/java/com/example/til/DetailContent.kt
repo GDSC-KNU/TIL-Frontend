@@ -1,12 +1,12 @@
 package com.example.til
 
-import android.content.DialogInterface
 import android.content.Intent
 import android.os.Build
 import android.os.Bundle
 import android.os.StrictMode
 import android.support.v7.app.AlertDialog
 import android.support.v7.app.AppCompatActivity
+import com.example.til.jwt.AuthInterceptor
 import com.squareup.okhttp.OkHttpClient
 import com.squareup.okhttp.Request
 import kotlinx.android.synthetic.main.detail_page.*
@@ -39,13 +39,12 @@ class DetailContent : AppCompatActivity() {
 
             builder.setTitle("게시물 삭제")
                 .setMessage("정말 삭제하시겠습니까?")
-                .setPositiveButton("확인",
-                DialogInterface.OnClickListener { dialog, which ->
+                .setPositiveButton("확인"
+                ) { _, _ ->
                     this.deletePost(id)
-                })
-                .setNegativeButton("취소",
-                DialogInterface.OnClickListener { dialog, which ->
-                })
+                }
+                .setNegativeButton("취소"
+                ) { _, _ -> }
 
             builder.show()
         }
@@ -61,6 +60,7 @@ class DetailContent : AppCompatActivity() {
         try {
             val url = "http://gdsc-knu-til.herokuapp.com/posts/"+id
             val client = OkHttpClient()
+            client.interceptors().add(AuthInterceptor())
 
             // GET 요청 객체 생성
             val builder = Request.Builder().url(url).get()
@@ -69,19 +69,23 @@ class DetailContent : AppCompatActivity() {
 
             // OkHttp 클라이언트로 GET 요청 객체 전송
             val response = client.newCall(request).execute()
-            println("START")
             if (response.isSuccessful) {
                 // 응답 받아서 처리
                 val body = response.body()
                 if (body != null) {
                     val responseStr = body.string()
-                    println(responseStr)
                     val json = JSONObject(responseStr)
-                    content_title.setText(json.getJSONObject("data").getString("title"))
-                    content_date.setText(json.getJSONObject("data").getString("date"))
+
+                    val title = json.getJSONObject("data").getString("title")
+                    val date = json.getJSONObject("data").getString("date")
+
+                    content_title.setText(title)
+                    content_date.setText(date)
                     content_content.setText(json.getJSONObject("data").getString("content"))
                 }
-            } else System.err.println("Error Occurred")
+            } else {
+                System.err.println("Code: ${response.code()}, body: ${response.body().string()}")
+            }
         } catch (e: Exception) {
             e.printStackTrace()
         }
@@ -91,6 +95,7 @@ class DetailContent : AppCompatActivity() {
         try {
             val url = "http://gdsc-knu-til.herokuapp.com/posts/" + id
             val client = OkHttpClient()
+            client.interceptors().add(AuthInterceptor())
 
             // GET 요청 객체 생성
             val builder = Request.Builder().url(url).delete()

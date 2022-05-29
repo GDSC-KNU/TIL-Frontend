@@ -10,10 +10,10 @@
         android:id="@+id/change_to_c"
         android:layout_width="50dp"
         android:layout_height="50dp"
-        android:gravity="left"
-        android:layout_marginTop="10dp"
         android:layout_marginLeft="10dp"
-        android:background="@drawable/calendar_icon" />
+        android:layout_marginTop="10dp"
+        android:background="@drawable/calendar_icon"
+        android:gravity="left" />
 
 
     <TextView
@@ -88,11 +88,6 @@
         android:id="@+id/barChart"
         android:layout_width="match_parent"
         android:layout_height="200dp"/>
-
-
-
-
-
 
 
 </LinearLayout>

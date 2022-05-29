@@ -23,12 +23,13 @@
         android:text="Email"/>
 
     <EditText
-        android:id="@+id/login_id"
+        android:id="@+id/login_edit_acconut"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
-        android:hint="example@example.com"/>
+        android:hint="example@example.com"
+        android:inputType="textEmailAddress" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -39,14 +40,15 @@
         android:text="Password"/>
 
     <EditText
-        android:id="@+id/login_passwd"
+        android:id="@+id/login_edit_password"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
+        android:inputType="textPassword" />
 
     <Button
-        android:id="@+id/login_btn"
+        android:id="@+id/login_submit_btn"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"

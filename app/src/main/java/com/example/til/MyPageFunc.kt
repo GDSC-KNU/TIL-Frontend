@@ -6,18 +6,13 @@ import android.os.Build
 import android.os.Bundle
 import android.os.StrictMode
 import android.support.v7.app.AppCompatActivity
+import com.example.til.jwt.AuthInterceptor
 import com.github.mikephil.charting.charts.BarChart
-import com.github.mikephil.charting.components.XAxis
-import com.github.mikephil.charting.components.YAxis
 import com.github.mikephil.charting.data.BarData
 import com.github.mikephil.charting.data.BarDataSet
 import com.github.mikephil.charting.data.BarEntry
 import com.squareup.okhttp.OkHttpClient
 import com.squareup.okhttp.Request
-import kotlinx.android.synthetic.main.detail_page.*
-import kotlinx.android.synthetic.main.detail_page.content_content
-import kotlinx.android.synthetic.main.detail_page.content_date
-import kotlinx.android.synthetic.main.list.*
 import kotlinx.android.synthetic.main.mypage.*
 import org.json.JSONArray
 import org.json.JSONObject
@@ -68,6 +63,7 @@ class MyPageFunc  : AppCompatActivity() {
         try {
             val url = "http://gdsc-knu-til.herokuapp.com/me/maximum_post_number_date"
             val client = OkHttpClient()
+            client.interceptors().add(AuthInterceptor())
 
             // GET 요청 객체 생성
             val builder = Request.Builder().url(url).get()
@@ -96,6 +92,7 @@ class MyPageFunc  : AppCompatActivity() {
     private fun GetNumPerDay(url : String) : ArrayList<Post> {
         val list = ArrayList<Post>()
         val client = OkHttpClient()
+        client.interceptors().add(AuthInterceptor())
 
         val builder = Request.Builder().url(url).get()
         builder.addHeader("Content-Type", "application/json; charset=utf-8");

@@ -48,9 +48,19 @@ class MyPageFunc  : AppCompatActivity() {
 
         val barChart : BarChart = findViewById(R.id.barChart)
         val DataSet = BarDataSet(barList, title)
-        DataSet.setColor(Color.GRAY)
+        DataSet.setColor(Color.rgb(107,153,0))
         val data= BarData(DataSet)
+        // 격자선 제거
+        barChart.getXAxis().setDrawGridLines(false)
+        barChart.getAxisLeft().setDrawGridLines(false)
+
+        barChart.getXAxis().setDrawLabels(false)
+
+        // y축 간격 조절
+        barChart.getAxisLeft().granularity=1f
+        barChart.getAxisRight().granularity=1f
         barChart.data=data
+
 
     }
 
@@ -75,6 +85,7 @@ class MyPageFunc  : AppCompatActivity() {
                     val json = JSONObject(responseStr)
                     best_date.setText(json.getJSONObject("data").getString("date"))
                     best_cnt.setText(json.getJSONObject("data").getString("number"))
+                    println(json.getJSONObject("data").getString("number")+"!!!!!")
                 }
             } else System.err.println("Error Occurred")
         } catch (e: Exception) {

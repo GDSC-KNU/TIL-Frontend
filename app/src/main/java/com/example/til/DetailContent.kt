@@ -1,6 +1,7 @@
 package com.example.til
 
 import android.content.DialogInterface
+import android.content.Intent
 import android.os.Build
 import android.os.Bundle
 import android.os.StrictMode
@@ -26,6 +27,12 @@ class DetailContent : AppCompatActivity() {
         val id=Integer.parseInt(tmp)
 
         renderPage(id)
+
+        edit_btn.setOnClickListener {
+            val intent = Intent(this, EditFunc::class.java)
+            intent.putExtra("Edit_ID", id)
+            startActivity(intent)
+        }
 
         delete_btn.setOnClickListener {
             val builder = AlertDialog.Builder(this)

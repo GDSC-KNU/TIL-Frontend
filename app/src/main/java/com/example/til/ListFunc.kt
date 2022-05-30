@@ -21,16 +21,6 @@ class ListFunc: AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.list)
 
-        changetoc.setOnClickListener {
-            finish()
-        }
-
-        mypage.setOnClickListener {
-            val intent = Intent(this, MyPageFunc::class.java)
-            startActivity(intent)
-        }
-
-
         if (Build.VERSION.SDK_INT > 9) {
             val policy = StrictMode.ThreadPolicy.Builder().permitAll().build()
             StrictMode.setThreadPolicy(policy)
@@ -39,7 +29,6 @@ class ListFunc: AppCompatActivity() {
         var list = dataAdd()
         val adapter = RecycleAdapter(list)
         recycleView.adapter = adapter
-
 
         list_search.setOnKeyListener {v, keyCode, event ->
             val imm=this.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
@@ -53,6 +42,22 @@ class ListFunc: AppCompatActivity() {
                 return@setOnKeyListener true
             }
             false
+        }
+
+        changetoc.setOnClickListener {
+            finish()
+        }
+
+        mypage.setOnClickListener {
+            val intent = Intent(this, MyPageFunc::class.java)
+            startActivity(intent)
+
+            finish()
+        }
+
+        floatingActionButton.setOnClickListener{
+            val intent = Intent(this, WritingFunc::class.java)
+            startActivity(intent)
         }
     }
 

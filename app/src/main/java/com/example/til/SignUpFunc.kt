@@ -1,11 +1,16 @@
 package com.example.til
 
 import android.content.Context
+import android.graphics.Color
 import android.os.Build
 import android.os.Bundle
 import android.os.StrictMode
 import android.support.v7.app.AppCompatActivity
+import android.text.Spannable
+import android.text.SpannableStringBuilder
+import android.text.style.ForegroundColorSpan
 import android.view.inputmethod.InputMethodManager
+import android.widget.TextView
 import android.widget.Toast
 import com.example.til.databinding.SignUpBinding
 import com.example.til.jwt.AuthRequest
@@ -19,10 +24,15 @@ import kotlinx.android.synthetic.main.sign_up.*
 
 
 class SignUpFunc : AppCompatActivity() {
+
     val JSON: MediaType = MediaType.parse("application/json; charset=utf-8")
 
     private var mBinding : SignUpBinding? = null
     private val binding get() = mBinding!!
+
+    private val checkLoginTextView: TextView by lazy {
+        findViewById(R.id.tologinbtn)
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -41,6 +51,14 @@ class SignUpFunc : AppCompatActivity() {
         tologinbtn.setOnClickListener {
             finish()
         }
+
+        val context = SpannableStringBuilder("계정이 이미 있나요? 로그인")
+        context.apply {
+            // 커스텀 컬러를 넣는 과정에서 에러가 생겨서 우선 색상코드로 대체함
+            setSpan(ForegroundColorSpan(Color.rgb(248, 95, 106)), 12, 15, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)
+        }
+
+        checkLoginTextView.text = context
     }
 
     private fun signup() {

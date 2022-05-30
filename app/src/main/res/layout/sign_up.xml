@@ -1,9 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    tools:context=".SignUpFunc">
 
 
     <TextView
@@ -70,7 +72,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
         android:layout_marginLeft="40dp"
-        android:layout_marginTop="60dp"
+        android:layout_marginTop="50dp"
         android:layout_marginRight="40dp"
         android:background="@drawable/round_button"
         android:text="계속하기"
@@ -83,8 +85,8 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
         android:layout_marginTop="22dp"
-        android:text="계정이 이미 있나요? 로그인"
-        android:textStyle="bold" />
+        android:textStyle="bold"
+        tools:text="계정이 이미 있나요? 로그인" />
 
 
 </LinearLayout>

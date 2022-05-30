@@ -11,9 +11,7 @@ import android.view.inputmethod.InputMethodManager
 import com.example.til.jwt.AuthInterceptor
 import com.squareup.okhttp.OkHttpClient
 import com.squareup.okhttp.Request
-import kotlinx.android.synthetic.main.calendar.*
 import kotlinx.android.synthetic.main.list.*
-import kotlinx.android.synthetic.main.list.mypage
 import org.json.JSONArray
 import org.json.JSONObject
 
@@ -72,23 +70,27 @@ class ListFunc: AppCompatActivity() {
 
         // OkHttp 클라이언트로 GET 요청 객체 전송
         val response = client.newCall(request).execute()
-        println("START")
         if (response.isSuccessful) {
             // 응답 받아서 처리
             val body = response.body()
             if (body != null) {
                 val responseStr = body.string()
-                val json : JSONObject = JSONObject(responseStr)
-                var json_arr : JSONArray =json.getJSONArray("data")
+                val json = JSONObject(responseStr)
+                val json_arr : JSONArray =json.getJSONArray("data")
 
-                //    var arrayList : ArrayList<TIL> = ArrayList()
                 for(i in 0 until json_arr.length()){
-                    var json_content : JSONObject = json_arr.getJSONObject(i)
-                    var til : Data = Data(
+                    val json_content : JSONObject = json_arr.getJSONObject(i)
+
+                    var content = json_content.getString("content")
+                    if (content.length > 40) {
+                        content = content.substring(0, 40) + "..."
+                    }
+
+                    val til = Data(
                         json_content.getInt("id"),
                         json_content.getString("title"),
                         json_content.getString("date"),
-                        json_content.getString("content")
+                        content
                     )
                     list.add(til)
                 }

@@ -138,11 +138,17 @@ class CalendarFunc : AppCompatActivity() {
 
                 for(i in 0 until jsonArr.length()){
                     val jsonContent : JSONObject = jsonArr.getJSONObject(i)
+
+                    var content = jsonContent.getString("content")
+                    if (content.length > 40) {
+                        content = content.substring(0, 40) + "..."
+                    }
+
                     val til = Data(
                         jsonContent.getInt("id"),
                         jsonContent.getString("title"),
                         jsonContent.getString("date"),
-                        jsonContent.getString("content")
+                        content
                     )
                     list.add(til)
                 }

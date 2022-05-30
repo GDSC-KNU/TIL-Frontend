@@ -21,12 +21,17 @@ import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
     val JSON: MediaType = MediaType.parse("application/json; charset=utf-8")
+    val backKeyHandler: BackKeyHandler = BackKeyHandler(this)
 
     private var mBinding : ActivityMainBinding? = null
     private val binding get() = mBinding!!
 
     companion object{
         lateinit var prefs: Prefs
+    }
+
+    override fun onBackPressed() {
+        backKeyHandler.onBackPressed()
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -43,10 +48,10 @@ class MainActivity : AppCompatActivity() {
         // jwt Token 보관용
         prefs=Prefs(applicationContext)
         if (isLogin(prefs)) {
-            val intent = Intent(this, CalendarFunc::class.java)
-            startActivity(intent)
-
-            finish()
+//            val intent = Intent(this, CalendarFunc::class.java)
+//            startActivity(intent)
+//
+//            finish()
         }
 
         login_submit_btn.setOnClickListener {

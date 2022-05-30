@@ -20,6 +20,12 @@ import org.json.JSONArray
 import org.json.JSONObject
 
 class CalendarFunc : AppCompatActivity() {
+    val backKeyHandler: BackKeyHandler = BackKeyHandler(this)
+
+    override fun onBackPressed() {
+        backKeyHandler.onBackPressed()
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.calendar)

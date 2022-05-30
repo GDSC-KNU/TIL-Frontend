@@ -11,7 +11,9 @@ import android.view.inputmethod.InputMethodManager
 import com.example.til.jwt.AuthInterceptor
 import com.squareup.okhttp.OkHttpClient
 import com.squareup.okhttp.Request
+import kotlinx.android.synthetic.main.calendar.*
 import kotlinx.android.synthetic.main.list.*
+import kotlinx.android.synthetic.main.list.mypage
 import org.json.JSONArray
 import org.json.JSONObject
 
@@ -30,6 +32,7 @@ class ListFunc: AppCompatActivity() {
             val intent = Intent(this, MyPageFunc::class.java)
             startActivity(intent)
         }
+
 
         if (Build.VERSION.SDK_INT > 9) {
             val policy = StrictMode.ThreadPolicy.Builder().permitAll().build()

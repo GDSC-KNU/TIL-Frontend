@@ -30,14 +30,15 @@
             android:layout_width="wrap_content"
             android:layout_height="48dp"
             android:text="미리보기"
+            android:background="#F85F6A"
             android:textColor="#FFFFFF" />
 
         <Button
             android:id="@+id/uploadButton"
-        android:layout_width="48dp"
-        android:layout_height="48dp"
-        android:layout_marginLeft="20dp"
-        android:background="@drawable/done_icon" />
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:layout_marginLeft="20dp"
+            android:background="@drawable/done_icon" />
 
     </LinearLayout>
 

@@ -66,6 +66,7 @@ class DetailContent : AppCompatActivity() {
             val builder = Request.Builder().url(url).get()
             builder.addHeader("Content-Type", "application/json; charset=utf-8");
             val request = builder.build()
+            val markdownView = markdownView
 
             // OkHttp 클라이언트로 GET 요청 객체 전송
             val response = client.newCall(request).execute()
@@ -78,10 +79,10 @@ class DetailContent : AppCompatActivity() {
 
                     val title = json.getJSONObject("data").getString("title")
                     val date = json.getJSONObject("data").getString("date")
-
+                    val content = json.getJSONObject("data").getString("content")
                     content_title.setText(title)
                     content_date.setText(date)
-                    content_content.setText(json.getJSONObject("data").getString("content"))
+                    markdownView.loadMarkdown(content)
                 }
             } else {
                 System.err.println("Code: ${response.code()}, body: ${response.body().string()}")

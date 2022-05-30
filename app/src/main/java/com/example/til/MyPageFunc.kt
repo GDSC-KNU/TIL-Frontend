@@ -1,6 +1,5 @@
 package com.example.til
 
-import android.content.Intent
 import android.graphics.Color
 import android.os.Build
 import android.os.Bundle
@@ -24,8 +23,7 @@ class MyPageFunc  : AppCompatActivity() {
         setContentView(R.layout.mypage)
 
         change_to_c.setOnClickListener {
-            val intent = Intent(this, CalendarFunc::class.java)
-            startActivity(intent)
+            finish()
         }
 
         if (Build.VERSION.SDK_INT > 9) {

@@ -22,8 +22,7 @@ class ListFunc: AppCompatActivity() {
         setContentView(R.layout.list)
 
         changetoc.setOnClickListener {
-            val intent = Intent(this, CalendarFunc::class.java)
-            startActivity(intent)
+            finish()
         }
 
         mypage.setOnClickListener {

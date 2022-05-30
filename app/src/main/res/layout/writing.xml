@@ -20,13 +20,17 @@
             android:layout_height="48dp"
             android:background="@drawable/back_btn" />
 
+        <Space
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1" />
+
         <Button
-        android:id="@+id/applyButton"
-        android:layout_width="62dp"
-        android:layout_height="48dp"
-        android:layout_marginLeft="190dp"
-        android:text="조회"
-        android:textColor="#FFFFFF" />
+            android:id="@+id/applyButton"
+            android:layout_width="wrap_content"
+            android:layout_height="48dp"
+            android:text="미리보기"
+            android:textColor="#FFFFFF" />
 
         <Button
             android:id="@+id/uploadButton"
@@ -41,35 +45,86 @@
         android:id="@+id/editTitle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:background="@null"
         android:ems="10"
-        android:inputType="textPersonName"
-        android:text="제목 입력"
+        android:hint="제목"
+        android:padding="10dp"
         android:textSize="24sp" />
 
-<ImageView
-android:id="@+id/imageView"
-android:layout_width="match_parent"
-android:layout_height="30dp"
-app:srcCompat="@drawable/divider2" />
-
-    <TextView
-        android:id="@+id/dateNow"
+    <View
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="작성일: " />
+        android:layout_height="2dp"
+        android:background="@android:color/darker_gray" />
+
+    <android.support.constraint.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="40dp">
+
+        <TextView
+            android:id="@+id/text_date_label"
+            style="bold"
+            android:layout_width="50dp"
+            android:layout_height="22dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="9dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginBottom="9dp"
+            android:gravity="center"
+            android:text="날짜"
+            android:textSize="18sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/text_date"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/text_date"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginStart="82dp"
+            android:layout_marginEnd="19dp"
+            android:gravity="center_vertical"
+            android:paddingHorizontal="5dp"
+            android:textSize="16sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/btn_date_picker"
+            app:layout_constraintStart_toEndOf="@+id/text_date_label"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageView
+            android:id="@+id/btn_date_picker"
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:layout_marginEnd="16dp"
+            android:clickable="true"
+            android:src="@drawable/calendar_icon"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/text_date"
+            app:layout_constraintTop_toTopOf="parent" />
+    </android.support.constraint.ConstraintLayout>
+
+    <View
+        android:id="@+id/view"
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:background="@android:color/darker_gray" />
 
     <us.feras.mdv.MarkdownView
-android:id="@+id/markdownView"
-android:layout_width="match_parent"
-android:layout_height="300dp" />
+        android:id="@+id/markdownView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="gone" />
 
-<EditText
-android:id="@+id/editText"
-android:layout_width="match_parent"
-android:layout_height="wrap_content"
-android:inputType="textMultiLine"
-android:lines="20"
-android:maxLines="10"
-android:scrollbars="vertical"
-android:hint="여기에 TIL 입력" />
+    <EditText
+        android:id="@+id/editText"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="top"
+        android:hint="여기에 TIL 입력"
+        android:inputType="textMultiLine"
+        android:padding="10dp"
+        android:scrollbars="vertical"
+        android:visibility="visible" />
 </LinearLayout>

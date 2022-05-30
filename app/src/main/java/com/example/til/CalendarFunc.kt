@@ -57,7 +57,6 @@ class CalendarFunc : AppCompatActivity() {
 
         //기록 유무 표시
         //api 받아와서 나중에 year, month, day 에 각각 int형으로 넣어주기
-//예시
         var list = ArrayList<Data>()
         try {
             val url = "http://gdsc-knu-til.herokuapp.com/posts"
@@ -108,6 +107,45 @@ class CalendarFunc : AppCompatActivity() {
             }
             false
         }
+    }
+
+    override fun onResume() {
+        super.onResume()
+
+        var list = ArrayList<Data>()
+        try {
+            val url = "http://gdsc-knu-til.herokuapp.com/posts"
+
+            list=getData(url)
+        } catch (e: Exception) {
+            e.printStackTrace()
+        }
+
+        val eventList = ArrayList<CalendarDay>()
+        for(d in list){
+            val ymd = d.date.split("-")
+            eventList.add(CalendarDay.from(Integer.parseInt(ymd[0]), Integer.parseInt(ymd[1]), Integer.parseInt(ymd[2])))
+        }
+
+        val eventIs = EventExpress(this, eventList)
+        materialCalendar.addDecorator(eventIs)
+
+        materialCalendar.setOnDateChangedListener { _: MaterialCalendarView, date: CalendarDay, b: Boolean ->
+            val clickList = java.util.ArrayList<Data>()
+
+            for (d in list) {
+                val ymd = d.date.split("-")
+                val yy = Integer.parseInt(ymd[0])
+                val mm = Integer.parseInt(ymd[1])
+                val dd = Integer.parseInt(ymd[2])
+                if (date.year == yy && date.month == mm && date.day == dd) {
+                    clickList.add(Data(d.id, d.title, d.date, d.content))
+                }
+            }
+            val adapter = RecycleAdapter(clickList)
+            calendar_recycleView.adapter = adapter
+        }
+
     }
 
     fun search_dataAdd(search_item : String): java.util.ArrayList<Data> {

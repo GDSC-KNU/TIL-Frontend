@@ -48,10 +48,10 @@ class MainActivity : AppCompatActivity() {
         // jwt Token 보관용
         prefs=Prefs(applicationContext)
         if (isLogin(prefs)) {
-//            val intent = Intent(this, CalendarFunc::class.java)
-//            startActivity(intent)
-//
-//            finish()
+            val intent = Intent(this, CalendarFunc::class.java)
+            startActivity(intent)
+
+            finish()
         }
 
         login_submit_btn.setOnClickListener {
@@ -70,8 +70,10 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun isLogin(prefs: Prefs) : Boolean {
+        return false  // 시연을 위해
+
         if (prefs.token == null) {
-            return false;
+            return false
         }
 
         val client = OkHttpClient()
@@ -109,7 +111,7 @@ class MainActivity : AppCompatActivity() {
 
                 response.body().close()
                 return true
-            } else if (response.code() == 401) {
+            } else if (response.code() == 401 || response.code() == 404) {
                 val inputMethodManager = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
                 inputMethodManager.hideSoftInputFromWindow(binding.loginEditAcconut.windowToken, 0)
                 Toast.makeText(this, "이메일 혹은 비밀번호가 틀렸습니다.", Toast.LENGTH_SHORT).show()

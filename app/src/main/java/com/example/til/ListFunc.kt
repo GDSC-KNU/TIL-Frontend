@@ -26,7 +26,7 @@ class ListFunc: AppCompatActivity() {
             StrictMode.setThreadPolicy(policy)
         }
 
-        var list = dataAdd()
+        val list = dataAdd()
         val adapter = RecycleAdapter(list)
         recycleView.adapter = adapter
 
@@ -36,7 +36,7 @@ class ListFunc: AppCompatActivity() {
               //  Toast.makeText(this, list_search.text, Toast.LENGTH_LONG).show()
                 imm.hideSoftInputFromWindow(list_search.windowToken, 0)
 
-                var list = search_dataAdd(list_search.text.toString())
+                val list = search_dataAdd(list_search.text.toString())
                 val adapter = RecycleAdapter(list)
                 recycleView.adapter = adapter
                 return@setOnKeyListener true
@@ -59,6 +59,14 @@ class ListFunc: AppCompatActivity() {
             val intent = Intent(this, WritingFunc::class.java)
             startActivity(intent)
         }
+    }
+
+    override fun onResume() {
+        super.onResume()
+
+        val list = dataAdd()
+        val adapter = RecycleAdapter(list)
+        recycleView.adapter = adapter
     }
 
     fun getData(url : String) : ArrayList<Data> {

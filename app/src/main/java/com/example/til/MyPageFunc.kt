@@ -7,6 +7,7 @@ import android.os.StrictMode
 import android.support.v7.app.AppCompatActivity
 import com.example.til.jwt.AuthInterceptor
 import com.github.mikephil.charting.charts.BarChart
+import com.github.mikephil.charting.components.Description
 import com.github.mikephil.charting.data.BarData
 import com.github.mikephil.charting.data.BarDataSet
 import com.github.mikephil.charting.data.BarEntry
@@ -41,13 +42,18 @@ class MyPageFunc  : AppCompatActivity() {
         }
 
         val barChart : BarChart = findViewById(R.id.barChart)
-        val DataSet = BarDataSet(barList, title)
-        DataSet.setColor(Color.rgb(107,153,0))
-        val data= BarData(DataSet)
+        val dataSet = BarDataSet(barList, title)
+        dataSet.setColor(Color.rgb(107,153,0))
+        dataSet.setDrawValues(false)
+        val data= BarData(dataSet)
+
+        val description = Description()
+        description.setEnabled(false)
+        barChart.setDescription(description)
+
         // 격자선 제거
         barChart.getXAxis().setDrawGridLines(false)
         barChart.getAxisLeft().setDrawGridLines(false)
-
         barChart.getXAxis().setDrawLabels(false)
 
         // y축 간격 조절
@@ -118,7 +124,7 @@ class MyPageFunc  : AppCompatActivity() {
                 val json : JSONObject = JSONObject(responseStr)
                 var json_arr : JSONArray =json.getJSONArray("data")
 
-                for(i in 0 until json_arr.length()){
+                for(i in 150 until json_arr.length()){
                     var json_content : JSONObject = json_arr.getJSONObject(i)
                     var post : Post = Post(
                         json_content.getString("date"),

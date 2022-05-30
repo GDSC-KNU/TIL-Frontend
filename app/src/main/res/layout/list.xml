@@ -58,7 +58,10 @@
         android:layout_height="match_parent"
         android:background="#FFFFFF"
         app:layoutManager="android.support.v7.widget.LinearLayoutManager"
-        tools:listitem="@layout/item_recycle" />
+        tools:listitem="@layout/item_recycle"
+        />
+
+
 
 
 </LinearLayout>

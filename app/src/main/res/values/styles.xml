@@ -7,6 +7,7 @@
         <item name="colorAccent">@color/colorAccent</item>
         <item name="colorControlNormal">#A9ACB3</item>
         <item name="colorControlActivated">@color/cursor</item>
+        <item name="windowNoTitle">true</item>
     </style>
 
 </resources>

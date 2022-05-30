@@ -24,6 +24,7 @@
             android:layout_width="62dp"
             android:layout_height="48dp"
             android:layout_marginLeft="190dp"
+            android:background="#F85F6A"
             android:text="조회"
             android:textColor="#FFFFFF" />
 
@@ -31,8 +32,8 @@
             android:id="@+id/uploadButton"
             android:layout_width="48dp"
             android:layout_height="48dp"
-            android:layout_marginLeft="20dp"/>
-            //android:background="@drawable/done_icon"
+            android:layout_marginLeft="20dp"
+            android:background="@drawable/done_icon"/>
 
 
     </LinearLayout>

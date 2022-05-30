@@ -1,40 +1,41 @@
 package com.example.til
 
-//import android.os.Bundle
-//import android.os.PersistableBundle
-//import android.support.v7.app.AppCompatActivity
-//
-//class EditFunc : AppCompatActivity() {
-//    override fun onCreate(savedInstanceState: Bundle?) {
-//        super.onCreate(savedInstanceState)
-//        setContentView(R.layout.edit_page)
-//    }
-//}
-
-//import androidx.appcompat.app.AppCompatActivity
+import android.app.DatePickerDialog
 import android.content.Intent
+import android.graphics.Rect
 import android.os.Build
 import android.os.Bundle
 import android.os.StrictMode
 import android.support.v4.content.ContextCompat
 import android.support.v7.app.AppCompatActivity
 import android.util.Log
+import android.view.MotionEvent
+import android.view.View
+import android.view.inputmethod.InputMethodManager
+import android.widget.Toast
 import com.example.til.databinding.EditPageBinding
 import com.example.til.jwt.AuthInterceptor
-import com.fasterxml.jackson.databind.ObjectMapper
 import com.squareup.okhttp.MediaType
 import com.squareup.okhttp.OkHttpClient
 import com.squareup.okhttp.Request
 import com.squareup.okhttp.RequestBody
 import kotlinx.android.synthetic.main.edit_page.*
 import org.json.JSONObject
+import java.util.*
 
 class EditFunc : AppCompatActivity() {
     private var mBinding : EditPageBinding? = null
     private val binding get() = mBinding!!
+
+    private var viewMode = false
+
+    private var calendar = Calendar.getInstance()
+    private var year = calendar.get(Calendar.YEAR)
+    private var month = calendar.get(Calendar.MONTH)
+    private var day = calendar.get(Calendar.DAY_OF_MONTH)
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        //setContentView(R.layout.activity_main)
         mBinding = EditPageBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
@@ -43,30 +44,24 @@ class EditFunc : AppCompatActivity() {
             StrictMode.setThreadPolicy(policy)
         }
 
-        val tmp=intent.getIntExtra("Edit_ID", 0).toString()
-        val id=Integer.parseInt(tmp)
+        val tmp = intent.getIntExtra("Edit_ID", 0).toString()
+        val id = Integer.parseInt(tmp)
 
         renderPage(id)
 
-        val markdownView = markdownView
-        var uploadText :String = ""
-        var uploadDate : String = ""
-        var uploadTitle: String = ""
-        markdownView.loadMarkdown("## Input Markdown")
-        applyButton.setOnClickListener {
-            uploadText = editText.text.toString()
-            uploadDate = editDate.text.toString()
-            uploadTitle = editTitle.text.toString()
-            markdownView.loadMarkdown(uploadText)
-            Log.d("markdown", "markdown uploaded")
-        }
-        backButton.setOnClickListener {
-            finish()
-        }
-        uploadButton.setOnClickListener {
-            post(id, uploadTitle, uploadDate, uploadText)
+        binding.markdownView.setBackgroundColor(0)
+
+        binding.btnDatePicker.setOnClickListener {
+            val datePickerDialog = DatePickerDialog(this, { _, year, month, day ->
+                binding.textDate.text = getString(R.string.send_date_format, year, month + 1, day)
+            }, year, month, day)
+
+            datePickerDialog.show()
         }
 
+        applyButton.setOnClickListener { toggleMarkdown() }
+        backButton.setOnClickListener { finish() }
+        uploadButton.setOnClickListener { post(id) }
     }
     override fun onDestroy() {
         mBinding = null
@@ -94,9 +89,9 @@ class EditFunc : AppCompatActivity() {
                     val responseStr = body.string()
                     println(responseStr)
                     val json = JSONObject(responseStr)
-                    editTitle.setText(json.getJSONObject("data").getString("title"))
-                    editDate.setText(json.getJSONObject("data").getString("date"))
-                    editText.setText(json.getJSONObject("data").getString("content"))
+                    binding.editTitle.setText(json.getJSONObject("data").getString("title"))
+                    binding.textDate.text = json.getJSONObject("data").getString("date")
+                    binding.editText.setText(json.getJSONObject("data").getString("content"))
                 }
             } else System.err.println("Error Occurred")
         } catch (e: Exception) {
@@ -104,14 +99,33 @@ class EditFunc : AppCompatActivity() {
         }
     }
 
-    private fun post(id: Int, uploadTitle: String, uploadDate: String, uploadText: String){
+    private fun post(id: Int){
         try {
+            val title = binding.editTitle.text.toString()
+            val content = binding.editText.text.toString()
+            val date = binding.textDate.text.toString()
+
+            if (title == "") {
+                Toast.makeText(this, "제목을 입력해야 합니다.", Toast.LENGTH_SHORT).show()
+                return
+            }
+            else if (content == "") {
+                Toast.makeText(this, "게시글 본문을 입력해야 합니다.", Toast.LENGTH_SHORT).show()
+                return
+            }
+            else if (date == "") {
+                Toast.makeText(this, "날짜를 입력해야 합니다.", Toast.LENGTH_SHORT).show()
+                return
+            }
+
             val url = "http://gdsc-knu-til.herokuapp.com/posts/"+id
 
             val jsonObject = JSONObject()
-            jsonObject.put("title", uploadTitle)
-            jsonObject.put("date", uploadDate)
-            jsonObject.put("content", uploadText)
+            jsonObject.put("title", title)
+            jsonObject.put("date", date)
+            jsonObject.put("content", content)
+
+            Log.d("test", jsonObject.toString())
 
             val client=OkHttpClient()
             client.interceptors().add(AuthInterceptor())
@@ -141,4 +155,41 @@ class EditFunc : AppCompatActivity() {
     }
 
     class EditContent (val title : String, val date : String, val content : String)
+
+    fun toggleMarkdown() {
+        val markdownView = binding.markdownView
+        val editText = binding.editText
+        val applyButton = binding.applyButton
+
+        if (viewMode) {
+            editText.visibility = View.VISIBLE
+            markdownView.visibility = View.GONE
+            applyButton.text = "미리보기"
+        }
+        else {
+            editText.visibility = View.GONE
+            markdownView.visibility = View.VISIBLE
+            applyButton.text = "수정하기"
+
+            markdownView.loadMarkdown(editText.text.toString())
+        }
+
+        viewMode = !viewMode
+    }
+
+    override fun dispatchTouchEvent(ev: MotionEvent): Boolean {
+        val focusView = currentFocus
+        if (focusView != null) {
+            val rect = Rect()
+            focusView.getGlobalVisibleRect(rect)
+            val x = ev.x.toInt()
+            val y = ev.y.toInt()
+            if (!rect.contains(x, y)) {
+                val imm = getSystemService(INPUT_METHOD_SERVICE) as InputMethodManager
+                imm.hideSoftInputFromWindow(focusView.windowToken, 0)
+                focusView.clearFocus()
+            }
+        }
+        return super.dispatchTouchEvent(ev)
+    }
 }

@@ -1,94 +1,95 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <LinearLayout
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical">
-
-    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
 
-        <Button
-            android:id="@+id/changeto"
-            android:layout_width="50dp"
+            <Button
+                android:id="@+id/changeto"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_weight="1"
+                android:gravity="left"
+                android:layout_marginTop="10dp"
+                android:layout_marginLeft="10dp"
+                android:background="@drawable/list_icon" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:layout_marginTop="10dp"
+                android:layout_weight="50"
+                android:textColor="#000000"
+                android:text="TIL 캘린더" />
+
+            <Button
+                android:id="@+id/mypage"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:gravity="right"
+                android:layout_marginTop="10dp"
+                android:layout_weight="1"
+                android:layout_marginRight="10dp"
+                android:background="@drawable/account" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="50dp"
-            android:layout_weight="1"
-            android:gravity="left"
-            android:layout_marginTop="10dp"
-            android:layout_marginLeft="10dp"
-            android:background="@drawable/list_icon" />
+            android:orientation="horizontal">
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:gravity="center"
-            android:layout_marginTop="10dp"
-            android:layout_weight="50"
-            android:textColor="#000000"
-            android:text="TIL 캘린더" />
+            <EditText
+                android:id="@+id/search"
+                android:layout_marginLeft="10dp"
+                android:drawableLeft="@drawable/search_icon"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:ems="20"
+                android:hint="키워드, 카테고리 검색"/>
 
-        <Button
-            android:id="@+id/mypage"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:gravity="right"
-            android:layout_marginTop="10dp"
-            android:layout_weight="1"
-            android:layout_marginRight="10dp"
-            android:background="@drawable/account" />
-    </LinearLayout>
+        </LinearLayout>
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:orientation="horizontal">
-
-        <EditText
-            android:id="@+id/search"
-            android:layout_marginLeft="10dp"
-            android:drawableLeft="@drawable/search_icon"
+        <com.prolificinteractive.materialcalendarview.MaterialCalendarView
+            android:id="@+id/materialCalendar"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:ems="20"
-            android:hint="키워드, 카테고리 검색"/>
+            app:mcv_selectionColor="#f85f6a"
+            app:mcv_showOtherDates="defaults" >
 
-    </LinearLayout>
-
-
-    <com.prolificinteractive.materialcalendarview.MaterialCalendarView
-        xmlns:app="http://schemas.android.com/apk/res-auto"
-        android:id="@+id/materialCalendar"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:mcv_showOtherDates="defaults"
-        app:mcv_selectionColor="#f85f6a" />
-
-    <android.support.design.widget.FloatingActionButton
-        android:id="@+id/floatingActionButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:fabSize="auto"
-        android:layout_gravity="right"
-        android:backgroundTint="#F83E4B"
-        android:clickable="true"
-        android:src="@drawable/plus" />
+        </com.prolificinteractive.materialcalendarview.MaterialCalendarView>
 
         <android.support.v7.widget.RecyclerView
             android:id="@+id/calendar_recycleView"
             app:layoutManager="android.support.v7.widget.LinearLayoutManager"
             tools:listitem="@layout/item_recycle"
             android:layout_width="match_parent"
-            android:layout_height="match_parent" />
+            android:layout_height="wrap_content" >
 
-
+        </android.support.v7.widget.RecyclerView>
     </LinearLayout>
-</ScrollView>
+
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/floatingActionButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|right"
+        android:backgroundTint="#F83E4B"
+        android:clickable="true"
+        android:layout_margin="16dp"
+        android:src="@drawable/plus"
+        app:fabSize="auto" />
+
+</FrameLayout>

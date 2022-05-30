@@ -28,6 +28,8 @@ class DetailContent : AppCompatActivity() {
 
         renderPage(id)
 
+        markdownView.setBackgroundColor(0)
+
         edit_btn.setOnClickListener {
             val intent = Intent(this, EditFunc::class.java)
             intent.putExtra("Edit_ID", id)
@@ -50,8 +52,6 @@ class DetailContent : AppCompatActivity() {
         }
 
         return_button.setOnClickListener() {
-            val intent = Intent(this, ListFunc::class.java)
-            startActivity(intent)
             finish()
         }
     }

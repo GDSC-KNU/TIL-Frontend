@@ -32,22 +32,73 @@
         android:background="#dee2e6"
         android:layout_width="match_parent"
         android:layout_height="2px"/>
+
     <TextView
-        android:layout_marginLeft="25dp"
-        android:text="TOP 1"
-        android:textColor="#F85F6A"
-        android:textSize="25dp"
-        android:textStyle="bold"
+        android:id="@+id/top_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginLeft="25dp"
         android:layout_marginTop="30dp"
-        android:layout_marginBottom="20dp"/>
+        android:layout_marginBottom="20dp"
+        android:text="@string/mypage_top_title"
+        android:textColor="#F85F6A"
+        android:textSize="25dp"
+        android:textStyle="bold" />
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
+
         <TextView
-            android:id="@+id/best_date"
+            android:id="@+id/best_date1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="40dp"
+            android:text=""
+            android:textColor="#000000"
+            android:textSize="20dp" />
+
+        <TextView
+            android:id="@+id/best_cnt1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="15dp"
+            android:text=""
+            android:textColor="#000000"
+            android:textSize="20dp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/best_date2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="40dp"
+            android:text=""
+            android:textColor="#000000"
+            android:textSize="20dp" />
+
+        <TextView
+            android:id="@+id/best_cnt2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
+            android:text=""
+            android:textColor="#000000"
+            android:textSize="20dp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/best_date3"
             android:textSize="20dp"
             android:textColor="#000000"
             android:layout_marginLeft="20dp"
@@ -57,13 +108,13 @@
             android:text=""/>
 
         <TextView
-            android:id="@+id/best_cnt"
+            android:id="@+id/best_cnt3"
             android:textSize="20dp"
             android:textColor="#000000"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text=""
-            android:layout_marginBottom="50dp"/>
+            android:layout_marginBottom="10dp"/>
     </LinearLayout>
 
     <TextView

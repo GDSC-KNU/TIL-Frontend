@@ -16,6 +16,7 @@ import com.squareup.okhttp.Request
 import kotlinx.android.synthetic.main.mypage.*
 import org.json.JSONArray
 import org.json.JSONObject
+import java.lang.Integer.min
 
 class MyPageFunc  : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -77,11 +78,24 @@ class MyPageFunc  : AppCompatActivity() {
                 val body = response.body()
                 if (body != null) {
                     val responseStr = body.string()
-                    println(responseStr)
                     val json = JSONObject(responseStr)
-                    best_date.setText(json.getJSONObject("data").getString("date"))
-                    best_cnt.setText(json.getJSONObject("data").getString("number"))
-                    println(json.getJSONObject("data").getString("number")+"!!!!!")
+                    val jsonArr = json.getJSONArray("data")
+                    val listLength = min(jsonArr.length(), 3)
+
+                    top_title.text = getString(R.string.mypage_top_title, listLength)
+                    // FIXME 잘 몰라서... 하드 코딩으로...
+                    if (listLength >= 1) {
+                        best_date1.text = jsonArr.getJSONObject(0).getString("date")
+                        best_cnt1.text = jsonArr.getJSONObject(0).getString("number")
+                    }
+                    if (listLength >= 2) {
+                        best_date2.text = jsonArr.getJSONObject(1).getString("date")
+                        best_cnt2.text = jsonArr.getJSONObject(1).getString("number")
+                    }
+                    if (listLength >= 3) {
+                        best_date3.text = jsonArr.getJSONObject(2).getString("date")
+                        best_cnt3.text = jsonArr.getJSONObject(2).getString("number")
+                    }
                 }
             } else System.err.println("Error Occurred")
         } catch (e: Exception) {

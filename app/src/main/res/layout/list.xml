@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#FFFFFF"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <LinearLayout
@@ -16,7 +17,7 @@
             android:layout_height="wrap_content"
             android:orientation="horizontal">
 
-            <Button
+            <ImageButton
                 android:id="@+id/changetoc"
                 android:layout_width="50dp"
                 android:layout_height="50dp"
@@ -24,18 +25,21 @@
                 android:gravity="left"
                 android:layout_marginTop="10dp"
                 android:layout_marginLeft="10dp"
-                android:background="@drawable/calendar_icon" />
+                android:src="@drawable/calendar_icon"
+                android:background="@null"/>
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:gravity="center"
                 android:layout_marginTop="10dp"
-                android:layout_weight="50"
+                android:layout_weight="8"
+                android:gravity="center"
+                android:text="TIL 캘린더"
                 android:textColor="#000000"
-                android:text="TIL 캘린더" />
+                android:textSize="14dp"
+                android:textStyle="bold" />
 
-            <Button
+            <ImageButton
                 android:id="@+id/mypage"
                 android:layout_width="50dp"
                 android:layout_height="50dp"
@@ -43,27 +47,32 @@
                 android:layout_marginTop="10dp"
                 android:layout_weight="1"
                 android:layout_marginRight="10dp"
-                android:background="@drawable/account" />
+                android:src="@drawable/account"
+                android:background="@null"/>
         </LinearLayout>
 
         <EditText
             android:id="@+id/list_search"
-            android:layout_marginLeft="10dp"
-            android:drawableLeft="@drawable/search_icon"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
+            android:layout_marginLeft="30dp"
+            android:layout_marginRight="30dp"
+            android:drawableLeft="@drawable/search_icon"
             android:ems="20"
-            android:hint="키워드, 카테고리 검색"/>
+            android:hint="키워드, 카테고리 검색"
+            android:textSize="14dp" />
 
         <android.support.v7.widget.RecyclerView
             android:id="@+id/recycleView"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:layout_marginLeft="25dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginRight="25dp"
             android:background="#FFFFFF"
             app:layoutManager="android.support.v7.widget.LinearLayoutManager"
-            tools:listitem="@layout/item_recycle"
-            />
+            tools:listitem="@layout/item_recycle" />
 
     </LinearLayout>
 
@@ -72,10 +81,12 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|right"
-        android:backgroundTint="#F83E4B"
+        android:backgroundTint="@color/colorMain"
         android:clickable="true"
-        android:layout_margin="16dp"
+        android:layout_margin="20dp"
         android:src="@drawable/plus"
+        android:tint="#FFFFFF"
+        app:borderWidth="0dp"
         app:fabSize="auto" />
 
 
